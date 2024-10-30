@@ -214,7 +214,7 @@
       fetch('https://ipinfo.io/json?token=YOUR_ACCESS_TOKEN') // Replace with your actual token
         .then(response => response.json())
         .then(data => {
-          const countryCode = data.country; // Get the country code
+          const countryCode = data.country_code; // Get the country code
           if (countryCode !== 'NO') { // 'NO' is the ISO country code for Norway
             alert("This page is accessible from Norway only.");
             // Optionally, you could redirect the user or hide content
