@@ -5,77 +5,140 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sonal Katiyar's Resume</title>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      scroll-behavior: smooth;
+    }
+    section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      transition: transform 0.5s ease;
+    }
+    .bg-primary {
+      background-color: #007bff !important;
+      color: white;
+    }
+    .card {
+      width: 100%;
+      max-width: 700px;
+      margin: auto;
+    }
+    @media (max-width: 768px) {
+      section {
+        padding: 1rem;
+      }
+      .card {
+        width: 90%;
+      }
+    }
+  </style>
 </head>
 <body>
 
 <!-- Header Section -->
-<header class="bg-primary text-white text-center py-4">
+<header class="bg-primary text-center py-4">
   <h1>Sonal Katiyar's Resume</h1>
   <p>Oslo, Norway | Phone: (+47) 96822062 | Email: sonalka000@gmail.com / s2412700@bi.no</p>
 </header>
 
 <!-- Main Content Section -->
-<main class="container my-4" id="content">
+<main id="content">
   <!-- Summary Section -->
-  <section class="card my-3">
-    <div class="card-body">
-      <h2 class="card-title">Summary</h2>
-      <ul>
-        <li><strong>6 years of experience</strong> in business administration and accounts with expertise in ERP systems and administrative tasks.</li>
-        <li>Experienced in Norwegian work culture across various industry roles.</li>
-        <li>Volunteer with Red Cross, supporting community integration efforts.</li>
-        <li><strong>Analytical skills</strong> developed through international projects funded by ICAR and World Bank.</li>
-        <li><strong>Norwegian Language:</strong> Level A2</li>
-      </ul>
+  <section class="bg-light">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title">Summary</h2>
+        <ul>
+          <li><strong>6 years of experience</strong> in business administration and accounts with ERP expertise.</li>
+          <li>Experienced in Norwegian work culture across various industries.</li>
+          <li>Volunteer with Red Cross, supporting community integration.</li>
+          <li><strong>Analytical skills</strong> developed through international projects funded by ICAR and World Bank.</li>
+          <li><strong>Norwegian Language:</strong> Level A2</li>
+        </ul>
+      </div>
     </div>
   </section>
 
   <!-- Education Section -->
-  <section class="card my-3">
-    <div class="card-body">
-      <h2 class="card-title">Education</h2>
-      <ul>
-        <li>MSc in Business Analytics (pursuing, 2024-2026), BI Business School, Norway</li>
-        <li>Masters in Commerce, University of Delhi, 2013-2016</li>
-        <li>Bachelors in Commerce, University of Delhi, 2010-2013</li>
-      </ul>
+  <section class="bg-secondary text-white">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title">Education</h2>
+        <ul>
+          <li>MSc in Business Analytics (pursuing, 2024-2026), BI Business School, Norway</li>
+          <li>Masters in Commerce, University of Delhi, 2013-2016</li>
+          <li>Bachelors in Commerce, University of Delhi, 2010-2013</li>
+        </ul>
+      </div>
     </div>
   </section>
 
   <!-- Experience Section -->
-  <section class="card my-3">
-    <div class="card-body">
-      <h2 class="card-title">Experience</h2>
-      <h3>Bank of India (New Delhi, India) - Banking Associate</h3>
-      <p><em>Full time, June 2017 - August 2017</em></p>
-      <ul>
-        <li>Handled customer queries, account openings, and financial record-keeping using Finnacle software.</li>
-      </ul>
+  <section class="bg-light">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title">Experience</h2>
+        <h3>Bank of India (New Delhi, India) - Banking Associate</h3>
+        <p><em>Full time, June 2017 - August 2017</em></p>
+        <ul>
+          <li>Handled customer queries, account openings, and financial record-keeping using Finnacle software.</li>
+        </ul>
 
-      <h3>ICAR - Ministry of Agriculture (Bareilly, India) - Administrative/Accounts Assistant</h3>
-      <p><em>Full time, August 2017 - May 2023</em></p>
-      <ul>
-        <li>Processed payroll, tax calculations, handled claims, and managed ERP-MIS and PFMS software.</li>
-        <li>Organized international deputations and maintained service records.</li>
-      </ul>
+        <h3>ICAR - Ministry of Agriculture (Bareilly, India) - Admin/Accounts Assistant</h3>
+        <p><em>Full time, August 2017 - May 2023</em></p>
+        <ul>
+          <li>Processed payroll, tax calculations, claims, and managed ERP-MIS and PFMS software.</li>
+          <li>Organized international deputations and maintained service records.</li>
+        </ul>
 
-      <h3>Norwegian Work Experience (Tromsø, Norway) - Various Roles</h3>
-      <p><em>June 2023 - July 2024</em></p>
-      <ul>
-        <li>Red Cross Volunteer: Managed inventory at the BUA store.</li>
-        <li>Nordic Lunch-BAMA: Experience in food production and hygiene maintenance.</li>
-      </ul>
+        <h3>Norwegian Work Experience (Tromsø, Norway) - Various Roles</h3>
+        <p><em>June 2023 - July 2024</em></p>
+        <ul>
+          <li>Red Cross Volunteer: Managed inventory at the BUA store.</li>
+          <li>Nordic Lunch-BAMA: Experience in food production and hygiene maintenance.</li>
+        </ul>
+      </div>
     </div>
   </section>
 
   <!-- More sections like Technical Skills, Certificates, etc. -->
-
 </main>
 
-<!-- Scripts -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="js/infinite-scroll.js"></script>
+<!-- JavaScript to Handle Infinite Scroll -->
+<script>
+  let currentIndex = 0;
+  const sections = document.querySelectorAll("section");
+
+  // Function to scroll to next section
+  function scrollToNextSection() {
+    currentIndex = (currentIndex + 1) % sections.length;
+    sections[currentIndex].scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // Event listener for scrolling
+  window.addEventListener("wheel", (event) => {
+    if (event.deltaY > 0) {
+      event.preventDefault();
+      scrollToNextSection();
+    }
+  });
+
+  // Basic country check (Norway only)
+  fetch('https://ipapi.co/json/')
+    .then(response => response.json())
+    .then(data => {
+      if (data.country !== 'NO') {
+        alert('This page is only accessible from Norway.');
+        document.body.innerHTML = "<h1>Access Restricted</h1><p>This page is only viewable within Norway.</p>";
+      }
+    });
+</script>
 
 </body>
 </html>
