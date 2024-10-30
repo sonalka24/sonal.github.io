@@ -211,21 +211,25 @@
 
     // Function to check user location
     function checkLocation() {
-      fetch('https://ipinfo.io/json?token=YOUR_ACCESS_TOKEN') // Replace with your actual token
-        .then(response => response.json())
-        .then(data => {
-          const countryCode = data.country_code; // Get the country code
-          if (countryCode !== 'NO') { // 'NO' is the ISO country code for Norway
-            alert("This page is accessible from Norway only.");
-            // Optionally, you could redirect the user or hide content
-            // window.location.href = "http://example.com"; // Redirect example
-          }
-        })
-        .catch(error => {
-          console.error('Error fetching location data:', error);
-          alert("Unable to determine location. Please try again later.");
-        });
-    }
+    fetch('https://ipinfo.io/json?token=YOUR_ACCESS_TOKEN') // Replace with your actual token
+      .then(response => response.json())
+      .then(data => {
+        const countryCode = data.country_code; // Get the country code
+        if (countryCode !== 'NO') { // 'NO' is the ISO country code for Norway
+          // Update inner HTML to show 'Page Not Found' message
+          document.body.innerHTML = `
+            <header style="text-align:center; padding: 50px;">
+              <h1 style="font-size: 3rem;">404</h1>
+              <h2>Page Not Found</h2>
+              <p>This page is accessible from Norway only.</p>
+            </header>
+          `;
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching location data:', error);
+        alert("Unable to determine location. Please try again later.");
+      });
   </script>
 
 </body>
