@@ -1,48 +1,535 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Location Check</title>
-    <script>
-        window.onload = function () {
-            // Fetch user's location from ipapi
-            fetch('https://ipapi.co/json/')
-                .then(response => response.json())
-                .then(data => {
-                    // Check if the country is Norway (NO)
-                    if (data.country_code !== 'NO') {
-                        // Load error.html content and replace the body
-                        fetch('error.html')
-                            .then(response => response.text())
-                            .then(errorContent => {
-                                document.body.innerHTML = errorContent; // Inject the error content
-                            })
-                            .catch(error => {
-                                console.error("Error fetching error page:", error);
-                            });
-                    }
-                })
-                .catch(error => {
-                    console.error("Error fetching location:", error);
-                    // Optionally load the error page here as well
-                    fetch('error.html')
-                        .then(response => response.text())
-                        .then(errorContent => {
-                            document.body.innerHTML = errorContent; // Inject the error content
-                        })
-                        .catch(error => {
-                            console.error("Error fetching error page:", error);
-                        });
-                });
-        };
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Open+Sans:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
+  <title>Profile Sonal Katiyar</title>
+  <style>
+    body, html {
+      scroll-behavior: smooth;
+      height: 100%;
+      margin: 0;
+      font-size:x-large;
+    }
+
+    header {
+            text-align: center;
+            padding: 5rem 1rem; /* Adjust padding for more space */
+            color: white; /* Text color */
+        }
+
+    section {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      color: #fff;
+    }
+
+
+    .bg-tertiary {
+      background-color: #2980b9;
+    }
+
+    h1, h2, h3 {
+      font-weight: 700;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      padding: 5px 0;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background-color: #333;
+      color: white;
+      padding: 10px 0;
+      text-align: center;
+    }
+
+    .navbar a {
+      color: #f2f2f2;
+      padding: 5px 5px;
+      text-decoration: none;
+      font-size: 17px;
+    }
+
+    .navbar a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+
+    p {
+        font-size: 1.2em; /* Increased font size for paragraph */
+        margin: 10px 0 0; /* Top margin for spacing */
+    }
+
+    h1 {
+            font-family: 'Roboto', sans-serif; /* Custom font for header */
+            font-size: 5em; /* Increased font size for visibility */
+            margin: 0; /* Remove default margin */
+        }
+    
+    #summary {
+            display: flex; /* Flexbox for side-by-side layout */
+            background-color: #6c757d; /* Secondary background color */
+            color: white; /* Text color */
+            padding: 1rem; /* Padding for the section */
+        }
+
+    .summary-left {
+        flex: 1; /* Takes remaining space */
+        padding-right: 2rem; /* Space between columns */
+    }
+
+    /* Right column styling */
+    .summary-right {
+        flex: 1; /* Fixed width for the photo */
+        display: flex; /* Flexbox for centering */
+        justify-content: right; /* Center horizontally */
+        align-items: center; /* Center vertically */
+    }
+
+    
+    .education-section {
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s;
+            width: 100%;
+            margin: 0 auto;
+        }
+        .education-section:hover {
+            transform: scale(1.05); /* Scale up on hover */
+        }
+        .education-list {
+            list-style: none;
+            padding: 0;
+            max-width: 600px;
+            margin: auto;
+        }
+        .education-item {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            background-color: #f9f9f9;
+            transition: transform 0.3s;
+        }
+        .education-item:hover {
+            transform: scale(1.03); /* Scale up on hover */
+        }
+        .education-link {
+            color: #333;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1.1em;
+        }
+
+        .experience-section {
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s;
+            width: 100%;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+
+        .skills-section {
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s;
+            background-color:#2980b9 ;
+            width: 100%;
+            margin: 0 auto;
+            margin-top: 20px;
+            
+        }
+
+        .certificates-section {
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s;
+            width: 100%;
+            margin: 0 auto;
+            margin-top: 20px;
+            
+        }
+
+        .projects-section {
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s;
+            width: 100%;
+            margin: 0 auto;
+            margin-top: 20px;
+            
+        }
+
+        .projects-section:hover {
+            transform: scale(1.05); /* Scale up on hover */
+        }
+        .skills-section:hover {
+            transform: scale(1.05); /* Scale up on hover */
+        }
+        .experience-section:hover {
+            transform: scale(1.05); /* Scale up on hover */
+        }
+
+        .certificates-section:hover {
+            transform: scale(1.05); /* Scale up on hover */
+        }
+        .experience-list {
+            list-style: none;
+            padding: 0;
+            max-width: 95%;
+            margin: auto;
+        }
+        .experience-item {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            transition: transform 0.3s;  
+        }
+        .experience-item:hover {
+            transform: scale(1.03); /* Scale up on hover */
+        }
+        .experience-title {
+            font-size: 0.95em;
+            margin-top: 5px;
+            background-color: rgba(19, 64, 4, 0.206); /* Black background */
+            color: white; /* White text */
+            padding: 10px; /* Add some padding for better appearance */
+            border-radius: 5px; /* Optional: Add rounded corners */
+            text-align: center; /* Center the text */
+        }
+        
+        .experience-details {
+            font-size: 0.95em;
+            font-style: italic;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .skills-list {
+            list-style-type: none; /* Remove default bullet points */
+            padding: 0; /* Remove default padding */
+            max-width: 80%; /* Set a maximum width for the list */
+            margin: auto; /* Center the list */
+        }
+
+        .skills-list li {
+            padding: 15px; /* Add padding */
+            border: 1px solid #ddd; /* Light border */
+            border-radius: 5px; /* Rounded corners */
+            margin-bottom: 10px; /* Space between items */
+            transition: transform 0.3s, box-shadow 0.3s; /* Transition for hover effects */
+        }
+
+        .skills-list li:hover {
+            transform: scale(1.05); /* Slightly enlarge the item on hover */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Add shadow effect on hover */
+        }
+        
+        #projects {
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+
+       .project-title {
+            font-size: 0.95em;
+            margin-top: 5px;
+            color: white; /* White text */
+            padding: 10px; /* Add some padding for better appearance */
+            border-radius: 5px; /* Optional: Add rounded corners */
+            text-align: center; /* Center the text */
+        }
+
+        .project-item {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .project-item h3 {
+            font-size: 1.5em;
+            color: #4b8e8d;
+            margin-bottom: 10px;
+        }
+
+        .project-item p {
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        .project-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .github-link {
+            display: inline-block;
+            margin-top: 10px;
+            color: #ffffff;
+            background-color: #333;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .github-link:hover {
+            background-color: #555;
+        }
+  </style>
+
 </head>
 
 <body>
-    <h1>Welcome to the Location Check Page</h1>
-    <p>We are checking your location...</p>
-</body>
 
+<div class="navbar">
+  <a href="#summary">Summary</a>
+  <a href="#education">Education</a>
+  <a href="#experience">Experience</a>
+  <a href="#skills">Technical Skills</a>
+  <a href="#certificates">Certificates</a>
+  <a href="#projects">Projects</a>
+</div>
+
+<!-- Header Section -->
+<header class="bg-tertiary">
+    <h1>Sonal Katiyar</h1>
+    <p>
+        <i class="fas fa-map-marker-alt icon"></i> Oslo, Norway | 
+        <i class="fas fa-phone-alt icon"></i> Phone: (+47) 96822062 | 
+        <i class="fas fa-envelope icon"></i> Email: sonalka000@gmail.com / s2412700@bi.no
+    </p>
+</header>
+
+
+
+<!-- Summary Section -->
+<section id="summary" >
+    <div class="summary-left">
+      <h2>Summary</h2>
+      
+      <ul>
+        <li><strong>Around 6 years of experience</strong> in business administration and accounting at Central Government and Public Sector Banks, where I gained valuable expertise in ERP systems and various administrative and accounting tasks, contributing to large-scale public initiatives.</li>
+        <li>Gained insights into Norwegian work culture through diverse experiences across multiple industries.</li>
+        <li>Volunteered with the Red Cross and engaged in various community events to foster meaningful connections and enhance my integration into society.</li>
+        <li><strong> Experience of analytical skills through my involvement in international projects funded by ICAR and the World Bank.</strong></li>
+        <li><strong>Learnt Norwegian at A2 level.</strong></li>
+    </ul>
+    
+    </div>
+    <div class="summary-right">
+      <img src="https://cdn-icons-png.flaticon.com/512/2842/2842177.png" alt="Your Name"> <!-- Replace with your image path -->
+    </div>
+  </section>
+
+<!-- Education Section -->
+<section id="education" class="bg-tertiary">
+    <div class="education-section" tabindex="0">
+        <h2 style="text-align: center; color: #edebeb; margin-bottom: 20px;">Education</h2>
+        <ul class="education-list">
+            <li class="education-item">
+                <i class="fas fa-graduation-cap" style="color: #FFD700; font-size: 1.5em; margin-right: 15px;"></i>
+                <div style="flex-grow: 1;">
+                    <a href="https://www.bi.edu/" target="_blank" class="education-link">MSc in Business Analytics (2024-2026), BI Business School, Norway</a>
+                </div>
+            </li>
+            <li class="education-item">
+                <i class="fas fa-graduation-cap" style="color: #FFD700; font-size: 1.5em; margin-right: 15px;"></i>
+                <div style="flex-grow: 1;">
+                    <a href="http://www.du.ac.in/" target="_blank" class="education-link">Masters in Commerce (2013-2016), University of Delhi</a>
+                </div>
+            </li>
+            <li class="education-item">
+                <i class="fas fa-graduation-cap" style="color: #FFD700; font-size: 1.5em; margin-right: 15px;"></i>
+                <div style="flex-grow: 1;">
+                    <a href="http://www.du.ac.in/" target="_blank" class="education-link">Bachelors in Commerce (2010-2013), University of Delhi</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<!-- Experience Section -->
+<section id="experience" class="bg-secondary">
+    <div class="experience-section" tabindex="0">
+        <h2 style="text-align: center; color: #edebeb; margin-bottom: 10px;">Experience</h2>
+        <ul class="experience-list">
+            <li class="experience-item">
+                <div class="experience-title">Bank of India</div>
+                <div class="experience-details">New Delhi, India - Banking Associate (Full time) - Jun. 2017 - Aug. 2017</div>
+                <ul>
+                    <li>Front desk employee <strong>Worked on banking software (Finnacle)</strong></li>
+                </ul>
+            </li>
+            <li class="experience-item">
+                <div class="experience-title">ICAR - Ministry of Agriculture</div>
+                <div class="experience-details">Bareilly, India - Administrative/Accounts Assistant (Full time) - Aug. 2017 - May. 2023</div>
+                <ol>
+                    <li><strong>Payroll processing, tax assessment, and income calculation.</strong> Clearing personal claims such as medical allowance and travelling allowance, worked on different software: <strong>ERP-MIS, PFMS (Public Fund Management System)</strong></li>
+                    <li><strong>Preparation of cases related to international deputation, promotion of officers.
+                    <li><strong>Part of project NAHEP-CAAST, a joint venture of <strong>World Bank and ICAR.</strong></strong></li>
+                </ol>
+            </li>
+
+            <li class="experience-item">
+                <div class="experience-title">Norwegian Work Experience</div>
+                <ol>
+                    <li><strong>Volunteer Red Cross:</strong> Experience in inventory management</li>
+                    <li><strong>Nordic Lunch - BAMA:</strong> Experience in food production and gained hands-on experience in making ready-to-eat meals.</li>
+                    <li><strong>Wondering Owl:</strong> Booking of Aurora tours, preparation of tours, and tried to provide guests with a memorable experience of their life.</li>
+                    <li><strong>Clarion Hotels:</strong> Worked in two roles: Extra help in kitchen, and meeting and events staff extra; Organization of meetings and conferences.</li>
+                </ol>
+            </li>
+
+        </ul>
+        </ul>
+    </div>
+</section>
+
+<!-- Technical Skills Section -->
+<section id="skills" class="bg-tertiary">
+    <div class="skills-section">
+      <h2 style="text-align: center; font-size: 3em; margin-bottom: 20px; padding: 30px;">Technical Skills</h2>
+      <ul class="skills-list">
+        <li><strong>Data Analytics:</strong> Beginner in Python, Pandas, Numpy, Matplotlib, and Seaborn for insightful data analysis and visualization.</li>
+        <li><strong>Business Optimization:</strong> Beginner in using Pyomo and Gurobi for solving complex optimization problems, enhancing decision-making processes.</li>
+        <li><strong>Data Modeling & Simulation:</strong>  Beginner in Vensim for developing models that simulate real-world scenarios, improving strategic planning.</li>
+        <li><strong>Statistical Software:</strong> Beginner in R Studio for statistical analysis and predictive modeling, driving data-informed decisions.</li>
+        <li><strong>Databases:</strong> Experience with SQL for managing and querying databases, ensuring efficient data handling and retrieval.</li>
+        <li><strong>Other Skills:</strong> Familiar with Finnacle, ERP-MIS, LaTeX, and Microsoft Office for diverse administrative and technical tasks.</li>
+      </ul>
+    </div>
+  </section>
+
+<!-- Certificates Section -->
+<section id="certificates" class="bg-secondary">
+  <div class="certificates-section">
+    <h2 style="text-align: center; font-size: 3em; margin-bottom: 20px; padding: 30px;">Certificates</h2>
+    <ul class="skills-list">
+      <li><strong>Accounting:</strong> Financial Management module from ACCA</li>
+      <li><strong>Business:</strong> Public Procurement, Institute of Financial Management, India</li>
+      <li><strong>Administration:</strong> Administrative Assistant Course, ISTM, Delhi</li>
+    </ul>
+  </div>
+</section>
+
+
+
+<section id="projects" class="bg-tertiary">
+    <div class="projects-section">
+    <div class="project-title">
+      <h2>Project & Open Source Work</h2>
+    </div>
+    <div class="project-item">
+      <h3>Strategic Evaluation of HR Policies in Indian Organizations</h3>
+      <p><strong>Description:</strong> Conducted a real-time survey of Indian employees in Delhi (Sample Size: 60). Analyzed employee retention, job satisfaction, organizational education initiatives, and current education levels. Examined reasons for leaving previous organizations and offered suggestions for improving retention.</p>
+      <a href="https://github.com/yourusername/hr-policy-evaluation" target="_blank" class="github-link">View on GitHub</a>
+    </div>
+  
+    <div class="project-item">
+      <h3>Market Basket Analysis for SuperBazar</h3>
+      <p><strong>Description:</strong> Performed market basket analysis for SuperBazar, uncovering customer purchasing patterns. Identified product associations to optimize store layout, enhancing cross-selling opportunities. Implementation improved customer experience and increased sales.</p>
+      <a href="https://github.com/yourusername/market-basket-analysis" target="_blank" class="github-link">View on GitHub</a>
+    </div>
+    
+</div>
+  </section>
+  
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    // Smooth scroll functionality
+    $(document).on('click', '.navbar a', function(event) {
+      event.preventDefault();
+      $('html, body').animate({
+        scrollTop: $($.attr(this, 'href')).offset().top
+      }, 500);
+    });
+  
+    // Simulated location check (Note: Requires server-side geolocation for production use)
+    function checkLocation() {
+              fetch('https://ipapi.co/json/') // Fetch location data
+                  .then(response => response.json())
+                  .then(data => {
+                      const countryCode = data.country_code; // Get the country code
+                      const ipAddress = data.ip; // Get the IP address
+                      if (countryCode !== 'NO') { // 'NO' is the ISO country code for Norway
+                          // Update inner HTML to show 'Page Not Found' message
+                          document.body.innerHTML = `
+                              <header style="text-align:center; padding: 50px;">
+                                  <h1 style="font-size: 3rem;">404</h1>
+                                  <h2>Page Not Found</h2>
+                                  <p>This page is accessible from Norway only.</p>
+                              </header>
+                          `;
+                      }
+                  })
+                  .catch(error => {
+                      console.error('Error fetching location data:', error);
+                      alert("Unable to determine location. Please try again later.");
+                  });
+          }
+    
+    const educationSection = document.querySelector('.education-section');
+    educationSection.addEventListener('focus', () => {
+        educationSection.style.transform = 'scale(1.05)';
+    });
+
+    educationSection.addEventListener('blur', () => {
+        educationSection.style.transform = 'scale(1)';
+    });
+    window.onload = function() {
+            checkLocation();
+        };
+
+        const experienceSection = document.querySelector('.experience-section');
+    experienceSection.addEventListener('focus', () => {
+        experienceSection.style.transform = 'scale(1.05)';
+    });
+
+    const skills = document.querySelector('.skills-section');
+    skills.addEventListener('focus', () => {
+        experienceSection.style.transform = 'scale(1.05)';
+    });
+
+    const certificates = document.querySelector('.certificates-section');
+    certificates.addEventListener('focus', () => {
+        experienceSection.style.transform = 'scale(1.05)';
+    });
+
+    experienceSection.addEventListener('blur', () => {
+        experienceSection.style.transform = 'scale(1)';
+    });
+    
+  </script>
+
+  
+</body>
 </html>
