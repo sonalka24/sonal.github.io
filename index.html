@@ -75,6 +75,45 @@
       color: black;
     }
   </style>
+  <script>
+     <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    // Smooth scroll functionality
+    $(document).on('click', '.navbar a', function(event) {
+      event.preventDefault();
+      $('html, body').animate({
+        scrollTop: $($.attr(this, 'href')).offset().top
+      }, 500);
+    });
+
+    // Function to check user location
+    function checkLocation() {
+            fetch('https://ipapi.co/json/') // Fetch location data
+                .then(response => response.json())
+                .then(data => {
+                    const countryCode = data.country_code; // Get the country code
+                    const ipAddress = data.ip; // Get the IP address
+                    alert("Your IP Address: " + ipAddress); // Show IP address in an alert
+
+                    if (countryCode !== 'NO') { // 'NO' is the ISO country code for Norway
+                        // Update inner HTML to show 'Page Not Found' message
+                        document.body.innerHTML = `
+                            <header style="text-align:center; padding: 50px;">
+                                <h1 style="font-size: 3rem;">404</h1>
+                                <h2>Page Not Found</h2>
+                                <p>This page is accessible from Norway only.</p>
+                            </header>
+                        `;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching location data:', error);
+                    alert("Unable to determine location. Please try again later.");
+                });
+  </script>
+  </script>
 </head>
 
 <body onload="checkLocation()">
@@ -196,44 +235,5 @@
       </ul>
     </div>
   </section>
-
-  <!-- Scripts -->
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script>
-    // Smooth scroll functionality
-    $(document).on('click', '.navbar a', function(event) {
-      event.preventDefault();
-      $('html, body').animate({
-        scrollTop: $($.attr(this, 'href')).offset().top
-      }, 500);
-    });
-
-    // Function to check user location
-    function checkLocation() {
-            fetch('https://ipapi.co/json/') // Fetch location data
-                .then(response => response.json())
-                .then(data => {
-                    const countryCode = data.country_code; // Get the country code
-                    const ipAddress = data.ip; // Get the IP address
-                    alert("Your IP Address: " + ipAddress); // Show IP address in an alert
-
-                    if (countryCode !== 'NO') { // 'NO' is the ISO country code for Norway
-                        // Update inner HTML to show 'Page Not Found' message
-                        document.body.innerHTML = `
-                            <header style="text-align:center; padding: 50px;">
-                                <h1 style="font-size: 3rem;">404</h1>
-                                <h2>Page Not Found</h2>
-                                <p>This page is accessible from Norway only.</p>
-                            </header>
-                        `;
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching location data:', error);
-                    alert("Unable to determine location. Please try again later.");
-                });
-  </script>
-
 </body>
 </html>
