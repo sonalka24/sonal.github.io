@@ -211,7 +211,7 @@
 
     // Function to check user location
     function checkLocation() {
-    fetch('https://ipinfo.io/json?token=YOUR_ACCESS_TOKEN') // Replace with your actual token
+     fetch('https://ipapi.co/json/') // Replace with your actual token
       .then(response => response.json())
       .then(data => {
         const countryCode = data.country_code; // Get the country code
