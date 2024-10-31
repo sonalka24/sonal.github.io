@@ -70,44 +70,44 @@
       height: auto;
       flex-direction: column;
     }
-    }
-
-    #navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: rgba(0, 0, 0, 1);
-        height:8%;
-
-    }
     
+
     .nav-links {
-        list-style: none;
-        width: 100%;
-        display: flex; /* Flex layout for horizontal menu */
-        justify-content: space-between; /* Distributes space equally between links */
-        margin: 1rem; /* Remove default margin */
-        padding: 1rem; /* Remove default padding 
-        /* Make sure the nav links take the full width */
+        flex-direction: column; /* Stack items vertically */
     }
-
-
     .nav-links li {
-        display: inline;
+        flex: 1; /* Allow items to take full width */
     }
+}
 
-    .nav-links a {
-        text-decoration: none;
-        color: white;
-        padding: 10px 15px;
-        transition: background-color 0.3s; /* Smooth hover effect */
-        background-color: rgba(0,0,0,1); /* Hover effect */
-    }
+#navbar {
+    background-color:black; /* Navbar background color */
+}
 
-    .nav-links a:hover {
-        background-color: white; /* Hover effect */
-        color: black;
-    }
+.nav-links {
+    display: flex; /* Use Flexbox for layout */
+    flex-wrap: wrap; /* Allow wrapping to multiple rows */
+    list-style: none; /* Remove bullet points */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+}
+
+
+
+.nav-links li {
+    flex: 1 1 auto; /* Allow items to grow and shrink */
+}
+
+
+
+.nav-links a {
+    display: block; /* Make links block elements */
+    padding: 15px 20px; /* Add padding for clickable area */
+    color: white; /* Link text color */
+    text-decoration: none; /* Remove underline */
+    text-align: center; /* Center align text */
+}
+
 
     p {
       font-size: 1.2em;
